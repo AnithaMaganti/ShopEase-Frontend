@@ -8,9 +8,9 @@ const Auth = () => {
     return (
         <div> {/* Added a wrapper div to ensure proper rendering */}
             {showRegister ? (
-                <Register onSwitch={() => setShowRegister(false)} /> // ✅ Ensures Register page opens
+                <Register onSwitch={() => setShowRegister(false)} /> //  Ensures Register page opens
             ) : (
-                <Login onSwitch={() => setShowRegister(true)} /> // ✅ Ensures Login page opens
+                <Login onSwitch={() => setShowRegister(true)} /> //  Ensures Login page opens
             )}
         </div>
     );

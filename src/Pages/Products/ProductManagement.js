@@ -96,10 +96,10 @@ export default function ProductManagement() {
     }
   };
 
-  // ✅ Fetch products by subcategory
+  //  Fetch products by subcategory
   const fetchProductsBySubcategory = async () => {
     try {
-      setSearchQuery(""); // ✅ Reset search bar when filters change
+      setSearchQuery(""); //  Reset search bar when filters change
       const response = await axios.get(
         `http://localhost:8081/api/products/subcategory/name/${subcategory}`
       );
@@ -110,10 +110,10 @@ export default function ProductManagement() {
     }
   };
 
-  // ✅ Fetch filtered products when filters are applied
+  //  Fetch filtered products when filters are applied
   const fetchFilteredProducts = async () => {
     try {
-      setSearchQuery(""); // ✅ Reset search when filters change
+      setSearchQuery(""); //  Reset search when filters change
 
       let params = {};
       const hasFilters = Object.keys(filters).some(
@@ -160,7 +160,7 @@ export default function ProductManagement() {
     // };
     
   
-     // ✅ Refresh cart when item is added
+     //  Refresh cart when item is added
   const refreshCart = () => {
     setCartUpdated((prev) => !prev);
   };
@@ -191,7 +191,7 @@ export default function ProductManagement() {
         flexWrap: "wrap",
         gap: 2,
         width: "100%",
-        justifyContent: { xs: "center", sm: "space-between" }, // ✅ Centered on mobile, spread on desktop
+        justifyContent: { xs: "center", sm: "space-between" }, //  Centered on mobile, spread on desktop
         alignItems: "center",
       }}
     >
@@ -409,8 +409,8 @@ export default function ProductManagement() {
               key={product.id}
               sx={{
                 width: "100%",
-                maxWidth: 250, // ✅ Consistent card size
-                height: 420, // ✅ Uniform height for better UI
+                maxWidth: 250, //  Consistent card size
+                height: 420, //  Uniform height for better UI
                 boxShadow: 3,
                 borderRadius: 2,
                 overflow: "hidden",
@@ -419,10 +419,10 @@ export default function ProductManagement() {
                 justifyContent: "space-between",
                 backgroundColor: "white",
                 transition: "transform 0.2s ease-in-out",
-                "&:hover": { transform: "scale(1.05)", boxShadow: 5 }, // ✅ Hover effect like Amazon
+                "&:hover": { transform: "scale(1.05)", boxShadow: 5 }, //  Hover effect like Amazon
               }}
             >
-              {/* ✅ Product Image */}
+              {/*  Product Image */}
               <CardMedia
                 component="img"
                 height="200"
@@ -432,10 +432,10 @@ export default function ProductManagement() {
                   objectFit: "contain",
                   padding: 1,
                   backgroundColor: "#f8f8f8",
-                }} // ✅ White background like Amazon
+                }} //  White background like Amazon
               />
 
-              {/* ✅ Product Details */}
+              {/*  Product Details */}
               <CardContent sx={{ padding: 2, textAlign: "left" }}>
                 <Typography
                   variant="body1"
@@ -450,7 +450,7 @@ export default function ProductManagement() {
                   Color: {product.color}
                 </Typography>
 
-                {/* ✅ Price & Discount */}
+                {/*  Price & Discount */}
                 <Typography
                   variant="h6"
                   sx={{ color: "#b12704", fontWeight: "bold" }}
@@ -461,7 +461,7 @@ export default function ProductManagement() {
                   </span>
                 </Typography>
 
-                {/* ✅ Rating (if available) */}
+                {/*  Rating (if available) */}
                 {product.rating && (
                   <Rating
                     value={product.rating}
@@ -471,13 +471,13 @@ export default function ProductManagement() {
                   />
                 )}
 
-                {/* ✅ Add to Cart Button */}
+                {/*  Add to Cart Button */}
                 {/* <Button
                   variant="contained"
                   fullWidth
                   sx={{
                     marginTop: 1,
-                    backgroundColor: "#ff9f00", // ✅ Amazon-like yellow button
+                    backgroundColor: "#ff9f00", //   yellow button
                     "&:hover": { backgroundColor: "#fb8c00" },
                   }}
                   // onClick={() => handleAddToCart(product)}

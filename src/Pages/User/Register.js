@@ -10,7 +10,7 @@ const Register = ({ onSwitch }) => {
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
     const [message, setMessage] = useState('');
-    const [isSuccess, setIsSuccess] = useState(false); // ✅ Track success state
+    const [isSuccess, setIsSuccess] = useState(false); //  Track success state
     const navigate = useNavigate();
 
     const handleRegister = async () => {

@@ -22,15 +22,15 @@ function App() {
   const [tokenChecked, setTokenChecked] = useState(false);
 
   useEffect(() => {
-    if (!tokenChecked) { // ✅ Only check token once
+    if (!tokenChecked) { //  Only check token once
       const token = getAccessToken();
       if (token) {
-        checkTokenExpiration().then(() => setTokenChecked(true)); // ✅ Ensure it's only checked once
+        checkTokenExpiration().then(() => setTokenChecked(true)); //  Ensure it's only checked once
       } else {
         setTokenChecked(true);
       }
     }
-  }, [tokenChecked]); // ✅ Dependency prevents re-running infinitely
+  }, [tokenChecked]); //  Dependency prevents re-running infinitely
 
   
   return (
@@ -44,7 +44,7 @@ function App() {
         <Route path="/user-menu" element={<UserMenu />} />
         <Route path="/products/:category" element={<ProductManagement />} /> 
         <Route path="/cart" element={<Cart />} /> 
-        <Route path="/checkout" element={<CheckoutPage />} /> {/* ✅ New Checkout Route */}
+        <Route path="/checkout" element={<CheckoutPage />} /> {/*  New Checkout Route */}
         <Route path="/order-confirmation/:orderId" element={<OrderConfirmation />} />
         <Route path="/manage-addresses" element={<ManageAddresses />} />
         <Route path="/order-tracking/:orderId" element={<OrderTracking />} />

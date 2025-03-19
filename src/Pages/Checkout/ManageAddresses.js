@@ -34,8 +34,8 @@ const ManageAddresses = () => {
   
 
   const handleSaveAddress = async () => {
-    const storedUser = JSON.parse(localStorage.getItem("user")); // ✅ Parse user object
-  const userId = storedUser?.id; // ✅ Extract userId
+    const storedUser = JSON.parse(localStorage.getItem("user")); //  Parse user object
+  const userId = storedUser?.id; //  Extract userId
 
   if (!userId) {
     alert("User ID is missing. Please log in again.");

@@ -7,7 +7,7 @@ export default function SearchBar({ onResults, searchQuery, setSearchQuery }) {
   const [query, setQuery] = useState(searchQuery);
 
   useEffect(() => {
-    setQuery(searchQuery); // ✅ Sync input with parent
+    setQuery(searchQuery); //  Sync input with parent
   }, [searchQuery]);
 
   const handleSearch = async (e) => {

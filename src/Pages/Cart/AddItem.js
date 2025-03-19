@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Button, Box, IconButton, Typography } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
-import api from "../User/Token"; // ✅ Import the centralized `api`
+import api from "../User/Token"; //  Import the centralized `api`
 
 const AddItem = ({ userId, productId, currentQuantity, fetchCart }) => {
   const [quantity, setQuantity] = useState(currentQuantity || 1);
 
-  // ✅ Function to update quantity
+ 
  // Function to update quantity
  const handleUpdateQuantity = async (newQuantity) => {
   if (newQuantity < 1) return; // Prevent quantity below 1
@@ -52,15 +52,15 @@ const AddItem = ({ userId, productId, currentQuantity, fetchCart }) => {
 
 
 
-  // ✅ Function to add a new item if not already in cart
+  //  Function to add a new item if not already in cart
   const handleAddToCart = () => {
     console.log("Adding product to cart...");
 
     api
-      .post("/cart/items", { userId, productId, quantity }) // ✅ Token automatically added
+      .post("/cart/items", { userId, productId, quantity }) //  Token automatically added
       .then(() => {
-        fetchCart(); // ✅ Refresh cart after adding item
-        alert("✅ Item added to cart!");
+        fetchCart(); //  Refresh cart after adding item
+        alert(" Item added to cart!");
       })
       .catch((error) => {
         console.error("❌ Error adding item:", error);
@@ -70,22 +70,22 @@ const AddItem = ({ userId, productId, currentQuantity, fetchCart }) => {
 
   return (
     <Box sx={{ display: "flex", alignItems: "center", marginTop: 2 }}>
-      {/* ✅ Decrease Quantity */}
+      {/*  Decrease Quantity */}
       <IconButton color="primary" onClick={() => handleUpdateQuantity(quantity - 1)}>
         <Remove />
       </IconButton>
 
-      {/* ✅ Display Quantity */}
+      {/*  Display Quantity */}
       <Typography sx={{ marginX: 2, fontSize: "18px", fontWeight: "bold" }}>
         {quantity}
       </Typography>
 
-      {/* ✅ Increase Quantity */}
+      {/*  Increase Quantity */}
       <IconButton color="primary" onClick={() => handleUpdateQuantity(quantity + 1)}>
         <Add />
       </IconButton>
 
-      {/* ✅ Add to Cart Button (only shown if item is not already in cart) */}
+      {/*  Add to Cart Button (only shown if item is not already in cart) */}
       {currentQuantity === 0 && (
         <Button variant="contained" color="success" onClick={handleAddToCart} sx={{ marginLeft: 2 }}>
           Add to Cart

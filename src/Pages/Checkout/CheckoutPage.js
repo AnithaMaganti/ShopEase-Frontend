@@ -1,20 +1,32 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../User/Token";
-import { Container, Card, Typography, Button, Select, MenuItem, TextField, Grid } from "@mui/material";
+import {
+  Container,
+  Card,
+  Typography,
+  Button,
+  Select,
+  MenuItem,
+  TextField,
+  Grid,
+  Box ,
+} from "@mui/material";
 
 const CheckoutPage = () => {
   const [addresses, setAddresses] = useState([]); // List of saved addresses
   const [selectedAddress, setSelectedAddress] = useState(""); // Selected address
-  const [newAddress, setNewAddress] = useState({ street: "", city: "", state: "" }); // New address form state
+  const [newAddress, setNewAddress] = useState({
+    street: "",
+    city: "",
+    state: "",
+  }); // New address form state
   const [showNewAddress, setShowNewAddress] = useState(false); // Toggle for new address form
   const [paymentMethods, setPaymentMethods] = useState([]); // Dynamic payment methods
   const [selectedPayment, setSelectedPayment] = useState(""); // Selected payment method
   const [cartItems, setCartItems] = useState([]); // Cart items
   const [totalPrice, setTotalPrice] = useState(0); // Total price
   const navigate = useNavigate();
-
-
 
   useEffect(() => {
     fetchCart();
@@ -32,7 +44,9 @@ const CheckoutPage = () => {
   // 🔹 Fetch Cart Items
   const fetchCart = async () => {
     try {
-      const response = await api.get("/cart", { params: { userId: storedUser.id } });
+      const response = await api.get("/cart", {
+        params: { userId: storedUser.id },
+      });
       setCartItems(response.data.items);
       setTotalPrice(response.data.totalPrice);
     } catch (error) {
@@ -43,7 +57,9 @@ const CheckoutPage = () => {
   // 🔹 Fetch Saved Addresses
   const fetchAddresses = async () => {
     try {
-      const response = await api.get("/addresses", { params: {  userId: storedUser.id } });
+      const response = await api.get("/addresses", {
+        params: { userId: storedUser.id },
+      });
       setAddresses(response.data);
       if (response.data.length > 0) {
         setSelectedAddress(response.data[0].id);
@@ -65,25 +81,25 @@ const CheckoutPage = () => {
 
   // 🔹 Place Order & Redirect to Tracking Page
   const handlePlaceOrder = async () => {
-    const storedUser = JSON.parse(localStorage.getItem("user")); // ✅ Get user from localStorage
+    const storedUser = JSON.parse(localStorage.getItem("user")); //  Get user from localStorage
     const userId = storedUser?.id;
-  
+
     if (!userId) {
       alert("User is not logged in. Please log in to place an order.");
       return;
     }
-  
+
     if (!selectedAddress || !selectedPayment) {
       alert("Please select an address and payment method.");
       return;
     }
-  
+
     if (!cartItems || cartItems.length === 0) {
       alert("Your cart is empty. Add items before placing an order.");
       return;
     }
-  
-    // ✅ Construct the request payload with items
+
+    //  Construct the request payload with items
     const orderRequest = {
       userId: userId,
       addressId: selectedAddress,
@@ -93,10 +109,10 @@ const CheckoutPage = () => {
         quantity: item.quantity,
       })),
     };
-  
+
     try {
       const response = await api.post("/order/place-order", orderRequest);
-  
+
       if (response.data.orderId) {
         alert("Order placed successfully! Redirecting...");
         navigate(`/order-tracking/${response.data.orderId}`);
@@ -107,7 +123,6 @@ const CheckoutPage = () => {
       alert("Order failed: " + (error.response?.data || error.message));
     }
   };
-  
 
   // 🔹 Handle New Address Submission
   const handleNewAddressSubmit = async () => {
@@ -126,7 +141,9 @@ const CheckoutPage = () => {
       setSelectedAddress(response.data.id);
       setShowNewAddress(false);
     } catch (error) {
-      alert("Failed to add address: " + (error.response?.data || error.message));
+      alert(
+        "Failed to add address: " + (error.response?.data || error.message)
+      );
     }
   };
 
@@ -138,8 +155,14 @@ const CheckoutPage = () => {
 
       {/* 📍 Address Selection */}
       <Card sx={{ mb: 3, p: 2 }}>
-        <Typography variant="h6" sx={{ fontWeight: "bold" }}>📍 Select Address</Typography>
-        <Select fullWidth value={selectedAddress} onChange={(e) => setSelectedAddress(e.target.value)}>
+        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+          📍 Select Address
+        </Typography>
+        <Select
+          fullWidth
+          value={selectedAddress}
+          onChange={(e) => setSelectedAddress(e.target.value)}
+        >
           <MenuItem value="">Choose an Address</MenuItem>
           {addresses.map((address) => (
             <MenuItem key={address.id} value={address.id}>
@@ -149,7 +172,11 @@ const CheckoutPage = () => {
         </Select>
 
         {/* ➕ Add New Address Button */}
-        <Button sx={{ mt: 2 }} variant="outlined" onClick={() => setShowNewAddress(!showNewAddress)}>
+        <Button
+          sx={{ mt: 2 }}
+          variant="outlined"
+          onClick={() => setShowNewAddress(!showNewAddress)}
+        >
           {showNewAddress ? "Cancel" : "➕ Add New Address"}
         </Button>
 
@@ -159,60 +186,99 @@ const CheckoutPage = () => {
             <Typography variant="h6">Add New Address</Typography>
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <TextField fullWidth label="Street" onChange={(e) => setNewAddress({ ...newAddress, street: e.target.value })} />
+                <TextField
+                  fullWidth
+                  label="Street"
+                  onChange={(e) =>
+                    setNewAddress({ ...newAddress, street: e.target.value })
+                  }
+                />
               </Grid>
               <Grid item xs={6}>
-                <TextField fullWidth label="City" onChange={(e) => setNewAddress({ ...newAddress, city: e.target.value })} />
+                <TextField
+                  fullWidth
+                  label="City"
+                  onChange={(e) =>
+                    setNewAddress({ ...newAddress, city: e.target.value })
+                  }
+                />
               </Grid>
               <Grid item xs={6}>
-                <TextField fullWidth label="State" onChange={(e) => setNewAddress({ ...newAddress, state: e.target.value })} />
+                <TextField
+                  fullWidth
+                  label="State"
+                  onChange={(e) =>
+                    setNewAddress({ ...newAddress, state: e.target.value })
+                  }
+                />
               </Grid>
             </Grid>
-            <Button sx={{ mt: 2 }} variant="contained" onClick={handleNewAddressSubmit}>Save Address</Button>
+            <Button
+              sx={{ mt: 2 }}
+              variant="contained"
+              onClick={handleNewAddressSubmit}
+            >
+              Save Address
+            </Button>
           </Card>
         )}
       </Card>
 
       {/* 💳 Payment Selection */}
       <Card sx={{ mb: 3, p: 2 }}>
-        <Typography variant="h6" sx={{ fontWeight: "bold" }}>💳 Payment Method</Typography>
-        <Select fullWidth value={selectedPayment} onChange={(e) => setSelectedPayment(e.target.value)}>
+        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+          💳 Payment Method
+        </Typography>
+        <Select
+          fullWidth
+          value={selectedPayment}
+          onChange={(e) => setSelectedPayment(e.target.value)}
+        >
           <MenuItem value="">Choose a Payment Method</MenuItem>
           {paymentMethods.map((method) => (
-            <MenuItem key={method} value={method}>{method}</MenuItem>
+            <MenuItem key={method} value={method}>
+              {method}
+            </MenuItem>
           ))}
         </Select>
       </Card>
 
       {/* 🛒 Order Summary */}
       <Card sx={{ p: 2 }}>
-        <Typography variant="h6" sx={{ fontWeight: "bold" }}>🛒 Order Summary</Typography>
+        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+          🛒 Order Summary
+        </Typography>
         {cartItems.map((item) => (
           <Typography key={item.id} sx={{ mt: 1 }}>
             {item.product.name} - ₹{item.product.price} x {item.quantity}
           </Typography>
         ))}
-        <Typography variant="h5" sx={{ mt: 2, fontWeight: "bold", color: "#FF9800" }}>
+        <Typography
+          variant="h5"
+          sx={{ mt: 2, fontWeight: "bold", color: "#FF9800" }}
+        >
           Total: ₹{totalPrice}
         </Typography>
       </Card>
 
       {/* 🛍️ Place Order Button */}
-      <Button
-        variant="contained"
-        fullWidth
-        sx={{
-          backgroundColor: "#FF9900",
-          color: "white",
-          fontWeight: "bold",
-          fontSize: "16px",
-          mt: 3,
-          "&:hover": { backgroundColor: "#E68A00" }
-        }}
-        onClick={handlePlaceOrder}
-      >
-        Place Order 🛍️
-      </Button>
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor: "#FF9900",
+            color: "white",
+            fontWeight: "bold",
+            fontSize: "16px",
+            width: "250px", // ✅ Adjust width to your preference
+            borderRadius: "8px",
+            "&:hover": { backgroundColor: "#E68A00" },
+          }}
+          onClick={handlePlaceOrder}
+        >
+          Place Order 🛍️
+        </Button>
+      </Box>
     </Container>
   );
 };

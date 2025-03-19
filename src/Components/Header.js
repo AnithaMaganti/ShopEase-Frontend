@@ -25,16 +25,16 @@ const Header = ({ onCategorySelect }) => {
     try {
         const storedUser = localStorage.getItem("user");
         if (storedUser) {
-            setUser(JSON.parse(storedUser)); // ✅ Only parse if it's valid JSON
+            setUser(JSON.parse(storedUser)); //  Only parse if it's valid JSON
         }
     } catch (error) {
         console.error("Error parsing user data:", error);
-        localStorage.removeItem("user"); // ✅ Remove invalid data
+        localStorage.removeItem("user"); //  Remove invalid data
         setUser(null);
     }
 }, []);
 
-// ✅ Function to toggle categories inside the mobile menu
+//  Function to toggle categories inside the mobile menu
 const toggleMobileCategories = () => {
   setMobileCategoriesOpen(!mobileCategoriesOpen);
 };
@@ -52,7 +52,7 @@ const toggleMobileCategories = () => {
     if (event && event.currentTarget) {
         event.preventDefault();
         event.stopPropagation();
-        setCategoriesAnchor(event.currentTarget); // ✅ Ensures valid anchorEl
+        setCategoriesAnchor(event.currentTarget); //  Ensures valid anchorEl
     }
 };
 
@@ -72,7 +72,7 @@ const toggleMobileCategories = () => {
   };
 
   const handleCategoryClick = (category) => {
-    navigate(`/products/${category.toLowerCase()}`); // ✅ Navigate to ProductManagement with category
+    navigate(`/products/${category.toLowerCase()}`); //  Navigate to ProductManagement with category
     handleCategoriesClose();
   };
 
@@ -106,7 +106,7 @@ const toggleMobileCategories = () => {
           {!isMobile && (
             <>
               <Button color="inherit" component={Link} to="/">Home</Button>
-              {/* ✅ Categories Dropdown */}
+              {/*  Categories Dropdown */}
               <Button color="inherit" onClick={handleCategoriesOpen} endIcon={<KeyboardArrowDown />}>Categories</Button>
               <Menu anchorEl={categoriesAnchor} open={Boolean(categoriesAnchor)} onClose={handleCategoriesClose}
                

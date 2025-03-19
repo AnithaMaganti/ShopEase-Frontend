@@ -19,10 +19,14 @@ const categories = [
 ];
 
 const bannerImages = [
-  "/images/banner1.jpg",
-  "/images/banner2.jpg",
-  "/images/banner3.jpg",
-  "/images/banner4.jpg",
+  // "/images/banner1.jpg",
+  // "/images/banner2.jpg",
+  // "/images/banner3.jpg",
+  // "/images/banner4.jpg",
+  "/images/banner8.jpg",
+  "/images/banner6.jpg",
+  "/images/banner7.jpg",
+  
 ];
 
 const carouselSettings = {
@@ -41,7 +45,7 @@ const carouselSettings = {
 const Home = () => {
   const navigate = useNavigate();
 
-  // ✅ Responsive breakpoints
+  //  Responsive breakpoints
   const isMobile = useMediaQuery("(max-width:600px)");
   const isTablet = useMediaQuery("(max-width:1024px)");
 
@@ -49,7 +53,7 @@ const Home = () => {
     <div style={{ backgroundColor: "#f1f1f1" }}>
       <Header />
 
-      {/* ✅ Hero Banner with Sliding Images */}
+      {/*  Hero Banner with Sliding Images */}
       <div
         style={{
           width: isMobile ? "95vw" : isTablet ? "85vw" : "80vw",
@@ -72,6 +76,7 @@ const Home = () => {
                   objectFit: "cover",
                   display: "block",
                   borderRadius: "10px",
+                  aspectRatio: "16/5", // Ensures consistent aspect ratio
                 }}
               />
             </div>
@@ -79,7 +84,7 @@ const Home = () => {
         </Slider>
       </div>
 
-      {/* ✅ Category Section */}
+      {/*  Category Section */}
       <Container sx={{ my: 4 }}>
         <Typography variant="h5" sx={{ fontWeight: "bold", textAlign: "start", mb: 2 }}>
           Shop by Category
@@ -131,7 +136,7 @@ const Home = () => {
         </Grid>
       </Container>
 
-      {/* ✅ Featured Products Section */}
+      {/*  Featured Products Section */}
       <FeaturedProducts />
 
       <Footer />

@@ -9,7 +9,7 @@ const ResetPassword = () => {
     const navigate = useNavigate();
     const location = useLocation();
     
-    // ✅ Get Token from URL
+    //  Get Token from URL
     const queryParams = new URLSearchParams(location.search);
     const token = queryParams.get("token");
 

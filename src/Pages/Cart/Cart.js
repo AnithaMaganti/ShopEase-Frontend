@@ -11,7 +11,7 @@ import {
   Grid,
 } from "@mui/material";
 import { Delete } from "@mui/icons-material";
-import AddItem from "./AddItem"; // ✅ Import AddItem component
+import AddItem from "./AddItem"; //  Import AddItem component
 import api from "../User/Token";
 import ProceedToCheckout from './../Checkout/ProceedToCheckout.js';
 
@@ -20,7 +20,7 @@ const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [userId, setUserId] = useState(null);
 
-  // ✅ Fetch userId from localStorage
+  //  Fetch userId from localStorage
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser?.id) {
@@ -28,7 +28,7 @@ const Cart = () => {
     }
   }, []);
 
-  // ✅ Fetch cart when userId changes or cart is updated
+  //  Fetch cart when userId changes or cart is updated
   const fetchCart = async () => {
     if (!userId) return;
 
@@ -48,11 +48,11 @@ const Cart = () => {
     fetchCart();
   }, [userId]);
 
-  // ✅ Remove item from cart
+  //  Remove item from cart
   const handleRemoveItem = (itemId) => {
     api
       .delete(`/cart/items/${itemId}`)
-      .then(() => fetchCart()) // ✅ Refetch cart after removing item
+      .then(() => fetchCart()) //  Refetch cart after removing item
       .catch((error) => console.error("Error removing item:", error));
   };
 
@@ -68,8 +68,8 @@ const Cart = () => {
       {cartItems.length > 0 ? (
         <List>
           {cartItems.map((item) => {
-            const product = item.product || {}; // ✅ Ensure product exists
-            const productTotal = item.quantity * (product.price || 0); // ✅ Calculate total for each product
+            const product = item.product || {}; //  Ensure product exists
+            const productTotal = item.quantity * (product.price || 0); //  Calculate total for each product
 
             return (
               <ListItem
@@ -87,7 +87,7 @@ const Cart = () => {
                 >
                   <CardContent>
                     <Grid container spacing={2} alignItems="center">
-                      {/* ✅ Product Image */}
+                      {/*  Product Image */}
                       <Grid item xs={3}>
                         <img
                           src={`http://localhost:8081${product.imageUrl}`}
@@ -96,7 +96,7 @@ const Cart = () => {
                         />
                       </Grid>
 
-                      {/* ✅ Product Details */}
+                      {/*  Product Details */}
                       <Grid item xs={6}>
                         <Typography
                           variant="h6"
@@ -116,7 +116,7 @@ const Cart = () => {
                           ₹{product.price || 0} <small>(per item)</small>
                         </Typography>
 
-                        {/* ✅ Show Total Price for Each Product */}
+                        {/* Show Total Price for Each Product */}
                         <Typography
                           variant="h6"
                           sx={{
@@ -133,16 +133,16 @@ const Cart = () => {
                           ✅ In Stock | Ships within 2 days
                         </Typography>
 
-                        {/* ✅ Use AddItem Component for Quantity Management */}
+                        {/*  Use AddItem Component for Quantity Management */}
                         <AddItem
                           userId={userId}
                           productId={item.id}
                           currentQuantity={item.quantity}
-                          fetchCart={fetchCart} // ✅ Ensure cart refreshes after updates
+                          fetchCart={fetchCart} //  Ensure cart refreshes after updates
                         />
                       </Grid>
 
-                      {/* ✅ Remove Button */}
+                      {/*  Remove Button */}
                       <Grid
                         item
                         xs={3}
@@ -180,7 +180,7 @@ const Cart = () => {
         </Typography>
       )}
 
-      {/* ✅ Right-Aligned Total Price & Checkout Button */}
+      {/*  Right-Aligned Total Price & Checkout Button */}
       <Box
         sx={{
           display: "flex",
@@ -189,7 +189,7 @@ const Cart = () => {
           marginTop: 4,
         }}
       >
-        {/* ✅ Total Price */}
+        {/*  Total Price */}
         <Typography
           variant="h5"
           sx={{ fontWeight: "bold", color: "#212121", marginRight: 3 }}
@@ -197,7 +197,7 @@ const Cart = () => {
           🏷️ Total Price: ₹{totalPrice}
         </Typography>
 
-        {/* ✅ Checkout Button (Amazon/Ajio Style) */}
+        {/*  Checkout Button (Amazon/Ajio Style) */}
         <Button
           variant="contained"
           sx={{
@@ -210,8 +210,8 @@ const Cart = () => {
             "&:hover": { backgroundColor: "#fb8c00" },
           }}
         >
-           {/* ✅ Render Proceed to Checkout only if cart has items */}
-        {cartItems.length > 0 && <ProceedToCheckout cartItems={cartItems} />}
+           {/*  Render Proceed to Checkout only if cart has items */}
+           {cartItems.length > 0 && <ProceedToCheckout cartItems={cartItems} />}
         </Button>
       </Box>
     </Container>

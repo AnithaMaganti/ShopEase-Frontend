@@ -26,7 +26,7 @@ const OrderConfirmation = () => {
   return (
     <Container maxWidth="md" sx={{ textAlign: "center", mt: 4 }}>
       <Typography variant="h4" sx={{ fontWeight: "bold", color: "#4CAF50" }}>
-        ✅ Order Confirmed!
+         Order Confirmed!
       </Typography>
       {orderDetails ? (
         <Card sx={{ p: 3, mt: 3 }}>

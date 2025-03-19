@@ -1,12 +1,12 @@
 import axios from "axios";
 
-// ✅ Save Tokens to Local Storage
+//  Save Tokens to Local Storage
 export const saveTokens = (accessToken, refreshToken) => {
     localStorage.setItem("accessToken", accessToken);
     localStorage.setItem("refreshToken", refreshToken);
 };
 
-// ✅ Get Tokens (Fix "undefined" issue)
+//  Get Tokens (Fix "undefined" issue)
 export const getAccessToken = () => {
     const token = localStorage.getItem("accessToken");
     return token && token !== "null" && token !== "undefined" ? token : null;
@@ -18,15 +18,15 @@ export const getRefreshToken = () => {
     return token && token !== "undefined" ? token : null;
 };
 
-// ✅ Logout User
+//  Logout User
 export const logoutUser = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("user");
-    window.location.href = "/login"; // ✅ Redirect to login page
+    window.location.href = "/login"; //  Redirect to login page
 };
 
-// ✅ Refresh Access Token
+//  Refresh Access Token
 export const refreshAccessToken = async () => {
     try {
         const refreshToken = getRefreshToken();
@@ -52,7 +52,7 @@ export const refreshAccessToken = async () => {
     }
 };
 
-// ✅ Check Token Expiry & Refresh If Needed
+//  Check Token Expiry & Refresh If Needed
 export const checkTokenExpiration = async () => {
     const accessToken = getAccessToken();
     const refreshToken = getRefreshToken();
@@ -64,10 +64,10 @@ export const checkTokenExpiration = async () => {
     }
 
     try {
-        const decodedToken = JSON.parse(atob(accessToken.split(".")[1])); // ✅ Wrapped in try-catch
+        const decodedToken = JSON.parse(atob(accessToken.split(".")[1])); //  Wrapped in try-catch
         const expirationTime = decodedToken.exp * 1000;
 
-        if (Date.now() >= expirationTime - 300000) { // ✅ Refresh 5 minutes before expiry
+        if (Date.now() >= expirationTime - 300000) { //  Refresh 5 minutes before expiry
             console.log("🔄 Access token about to expire, refreshing...");
             return refreshAccessToken();
         }
@@ -77,7 +77,7 @@ export const checkTokenExpiration = async () => {
     }
 };
 
-// ✅ Create Axios Instance
+//  Create Axios Instance
 const api = axios.create({
     baseURL: "http://localhost:8081/api",
      headers: {
@@ -86,7 +86,7 @@ const api = axios.create({
     }
   });
   
-  // ✅ Axios Interceptor to Add Token in Request Header
+  //  Axios Interceptor to Add Token in Request Header
   api.interceptors.request.use((config) => {
     // Retrieve token from localStorage (or sessionStorage)
     const token = localStorage.getItem("accessToken");
@@ -98,7 +98,7 @@ const api = axios.create({
     return Promise.reject(error);
   });
   
-  // ✅ Axios Interceptor to Handle Token Expiry and Retry Request
+  //  Axios Interceptor to Handle Token Expiry and Retry Request
   api.interceptors.response.use(
     (response) => response,
     async (error) => {

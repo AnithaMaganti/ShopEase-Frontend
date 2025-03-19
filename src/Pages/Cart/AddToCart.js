@@ -1,9 +1,9 @@
 import React from "react";
-import { Button } from "@mui/material"; // ✅ Import Button from MUI
+import { Button } from "@mui/material"; // Import Button from MUI
 import api from "../User/Token";
 
 const AddToCart = ({ productId, refreshCart }) => {
-  // ✅ Fetch userId from localStorage
+  //  Fetch userId from localStorage
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const userId = storedUser ? storedUser.id : null;
 
@@ -16,7 +16,7 @@ const AddToCart = ({ productId, refreshCart }) => {
     const cartItem = {
       userId,
       productId,
-      quantity: 1, // ✅ Default quantity to 1
+      quantity: 1, //  Default quantity to 1
     };
 
 
@@ -26,7 +26,7 @@ const AddToCart = ({ productId, refreshCart }) => {
       .post("/cart/items", cartItem)
       .then(() => {
         alert("Item added to cart!");
-        refreshCart(); // ✅ Refresh cart after adding item
+        refreshCart(); //  Refresh cart after adding item
       })
       .catch((error) => {
         console.error("Error adding item to cart:", error);
@@ -40,7 +40,7 @@ const AddToCart = ({ productId, refreshCart }) => {
       fullWidth
       sx={{
         marginTop: 1,
-        backgroundColor: "#ff9f00", // ✅ Amazon-like yellow button
+        backgroundColor: "#ff9f00", //   yellow button
         "&:hover": { backgroundColor: "#fb8c00" }
       }}
       onClick={handleAddToCart}

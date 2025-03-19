@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import api from "../User/Token";
-import Slider from "react-slick";  // ✅ Amazon-style scrolling
+import Slider from "react-slick";  // scrolling
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material"; // ✅ Same color icons
+import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material"; //  Same color icons
 
 const FeaturedProducts = () => {
     const [products, setProducts] = useState([]);
@@ -15,7 +14,7 @@ const FeaturedProducts = () => {
             .catch(error => console.error("Error fetching featured products:", error));
     }, []);
 
-    // ✅ Custom Arrow Component
+    //  Custom Arrow Component
     const CustomArrow = ({ direction, onClick }) => {
         const isLeft = direction === "left";
         return (
@@ -25,13 +24,13 @@ const FeaturedProducts = () => {
                     position: "absolute",
                     top: "50%",
                     transform: "translateY(-50%)",
-                    [isLeft ? "left" : "right"]: "-30px", // ✅ Position arrows outside the slider
+                    [isLeft ? "left" : "right"]: "-30px", //  Position arrows outside the slider
                     zIndex: 2,
                     cursor: "pointer",
-                    color: "#ff9900",  // ✅ Amazon-like orange color
+                    color: "#ff9900",  // orange color
                     fontSize: "30px",
                     backgroundColor: "white",
-                    borderRadius: "50%", // 🔽 Reduced from 80% to 50% for smaller roundness
+                    borderRadius: "50%", //  Reduced from 80% to 50% for smaller roundness
                     padding: "5px",
                     boxShadow: "0px 2px 5px rgba(0,0,0,0.2)",
                 }}
@@ -42,7 +41,7 @@ const FeaturedProducts = () => {
     };
     
 
-    // ✅ Amazon-like Carousel Settings
+    //  Amazon-like Carousel Settings
     const sliderSettings = {
         dots: false,
         infinite: true,
@@ -51,15 +50,15 @@ const FeaturedProducts = () => {
         slidesToScroll: 2,
         autoplay: true,
         autoplaySpeed: 2000,
-        prevArrow: <CustomArrow direction="left" />,  // ✅ Same color left arrow
-        nextArrow: <CustomArrow direction="right" />, // ✅ Same color right arrow
+        prevArrow: <CustomArrow direction="left" />,  //  Same color left arrow
+        nextArrow: <CustomArrow direction="right" />, //  Same color right arrow
         responsive: [
             {
-                breakpoint: 1024, // ✅ Tablets
+                breakpoint: 1024, //  Tablets
                 settings: { slidesToShow: 3, slidesToScroll: 2 },
             },
             {
-                breakpoint: 768, // ✅ Mobile
+                breakpoint: 768, //  Mobile
                 settings: { slidesToShow: 2, slidesToScroll: 1 },
             },
         ],
